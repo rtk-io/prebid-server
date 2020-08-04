@@ -76,9 +76,8 @@ func (f *FileLogger) LogAmpObject(ao *analytics.AmpObject) {
 func NewFileLogger(filename string) (analytics.PBSAnalyticsModule, error) {
 	options := glog.LogOptions{
 		File:  filename,
-		Flag:  glog.LstdFlags,
+		Flag:  glog.LstdNull,
 		Level: glog.Ldebug,
-		Mode:  glog.R_Day,
 	}
 	if logger, err := glog.New(options); err == nil {
 		return &FileLogger{
