@@ -6,24 +6,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/mxmCherry/openrtb"
 	"github.com/prebid/prebid-server/analytics"
-	"github.com/prebid/prebid-server/usersync"
 )
 
 const TEST_DIR string = "testFiles"
-
-func TestAmpObject_ToJson(t *testing.T) {
-	ao := &analytics.AmpObject{
-		Status:             http.StatusOK,
-		Errors:             make([]error, 0),
-		AuctionResponse:    &openrtb.BidResponse{},
-		AmpTargetingValues: map[string]string{},
-	}
-	if aoJson := jsonifyAmpObject(ao); strings.Contains(aoJson, "Transactional Logs Error") {
-		t.Fatalf("AmpObject failed to convert to json")
-	}
-}
 
 func TestAuctionObject_ToJson(t *testing.T) {
 	ao := &analytics.AuctionObject{
@@ -31,36 +17,6 @@ func TestAuctionObject_ToJson(t *testing.T) {
 	}
 	if aoJson := jsonifyAuctionObject(ao); strings.Contains(aoJson, "Transactional Logs Error") {
 		t.Fatalf("AuctionObject failed to convert to json")
-	}
-}
-
-func TestVideoObject_ToJson(t *testing.T) {
-	vo := &analytics.VideoObject{
-		Status: http.StatusOK,
-	}
-	if voJson := jsonifyVideoObject(vo); strings.Contains(voJson, "Transactional Logs Error") {
-		t.Fatalf("AuctionObject failed to convert to json")
-	}
-}
-
-func TestSetUIDObject_ToJson(t *testing.T) {
-	so := &analytics.SetUIDObject{
-		Status: http.StatusOK,
-		Bidder: "any-bidder",
-		UID:    "uid string",
-	}
-	if soJson := jsonifySetUIDObject(so); strings.Contains(soJson, "Transactional Logs Error") {
-		t.Fatalf("SetUIDObject failed to convert to json")
-	}
-}
-
-func TestCookieSyncObject_ToJson(t *testing.T) {
-	cso := &analytics.CookieSyncObject{
-		Status:       http.StatusOK,
-		BidderStatus: []*usersync.CookieSyncBidders{},
-	}
-	if csoJson := jsonifyCookieSync(cso); strings.Contains(csoJson, "Transactional Logs Error") {
-		t.Fatalf("CookieSyncObject failed to convert to json")
 	}
 }
 
