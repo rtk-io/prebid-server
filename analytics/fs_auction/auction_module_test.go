@@ -1,4 +1,4 @@
-package filesystem
+package fs_auction
 
 import (
 	"net/http"
@@ -20,14 +20,14 @@ func TestAuctionObject_ToJson(t *testing.T) {
 	}
 }
 
-func TestFileLogger_LogObjects(t *testing.T) {
+func TestAuctionFileLogger_LogObjects(t *testing.T) {
 	if _, err := os.Stat(TEST_DIR); os.IsNotExist(err) {
 		if err = os.MkdirAll(TEST_DIR, 0755); err != nil {
 			t.Fatalf("Could not create test directory for FileLogger")
 		}
 	}
 	defer os.RemoveAll(TEST_DIR)
-	if fl, err := NewFileLogger(TEST_DIR + "//test"); err == nil {
+	if fl, err := NewAuctionFileLogger(TEST_DIR + "//test"); err == nil {
 		fl.LogAuctionObject(&analytics.AuctionObject{})
 	} else {
 		t.Fatalf("Couldn't initialize file logger: %v", err)

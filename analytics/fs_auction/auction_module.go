@@ -1,4 +1,4 @@
-package filesystem
+package fs_auction
 
 import (
 	"bytes"
@@ -16,12 +16,12 @@ const (
 )
 
 //Module that can perform transactional logging
-type FileLogger struct {
+type AuctionFileLogger struct {
 	Logger *glog.Logger
 }
 
 //Writes AuctionObject to file
-func (f *FileLogger) LogAuctionObject(ao *analytics.AuctionObject) {
+func (f *AuctionFileLogger) LogAuctionObject(ao *analytics.AuctionObject) {
 	//Code to parse the object and log in a way required
 	var b bytes.Buffer
 	b.WriteString(jsonifyAuctionObject(ao))
@@ -30,34 +30,34 @@ func (f *FileLogger) LogAuctionObject(ao *analytics.AuctionObject) {
 }
 
 //Writes VideoObject to file
-func (f *FileLogger) LogVideoObject(vo *analytics.VideoObject) {
+func (f *AuctionFileLogger) LogVideoObject(vo *analytics.VideoObject) {
 	// do nothing
 }
 
 //Logs SetUIDObject to file
-func (f *FileLogger) LogSetUIDObject(so *analytics.SetUIDObject) {
+func (f *AuctionFileLogger) LogSetUIDObject(so *analytics.SetUIDObject) {
 	// do nothing
 }
 
 //Logs CookieSyncObject to file
-func (f *FileLogger) LogCookieSyncObject(cso *analytics.CookieSyncObject) {
+func (f *AuctionFileLogger) LogCookieSyncObject(cso *analytics.CookieSyncObject) {
 	// do nothing
 }
 
 //Logs AmpObject to file
-func (f *FileLogger) LogAmpObject(ao *analytics.AmpObject) {
+func (f *AuctionFileLogger) LogAmpObject(ao *analytics.AmpObject) {
 	// do nothing
 }
 
 //Method to initialize the analytic module
-func NewFileLogger(filename string) (analytics.PBSAnalyticsModule, error) {
+func NewAuctionFileLogger(filename string) (analytics.PBSAnalyticsModule, error) {
 	options := glog.LogOptions{
 		File:  filename,
 		Flag:  glog.LstdNull,
 		Level: glog.Ldebug,
 	}
 	if logger, err := glog.New(options); err == nil {
-		return &FileLogger{
+		return &AuctionFileLogger{
 			logger,
 		}, nil
 	} else {
